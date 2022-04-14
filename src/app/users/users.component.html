@@ -1,0 +1,9 @@
+<div>
+  <form [formGroup]="forma">
+    <input id="searchTerm" type="text" formControlName="searchTerm" />
+    <button class="button" type="submit" (click)="onSubmit()">Submit</button>
+  </form>
+  <div *ngFor="let user of users">
+    <p>{{ user.FirstName }} {{ user.LastName }} {{ user.Email }}</p>
+  </div>
+</div>
