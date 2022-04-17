@@ -19,7 +19,7 @@ export class SettingsComponent implements OnInit {
 
   onSubmit(): void {
     // Process input data here
-    console.log('Your order has been submitted', this.forma.value);
+    console.log('Your secret has been submitted', this.forma.value);
     this.login(this.forma.value.client_id, this.forma.value.client_secret);
     this.forma.reset();
   }

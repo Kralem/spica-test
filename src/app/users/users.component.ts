@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   HttpClient,
   HttpHeaders,
-  HttpParams,
-  HttpParamsOptions,
+  HttpParams
 } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 @Component({
