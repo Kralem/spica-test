@@ -38,7 +38,6 @@ export class AbsencesComponent implements OnInit {
       console.log('error');
       return;
     }
-    console.log(this.forma.value.datumOD);
     let string_url = 'https://api4.allhours.com/api/v1/Absences';
     let string_url2 = 'https://api4.allhours.com/api/v1/Users';
     token = JSON.parse(token).access_token as string;
@@ -51,6 +50,7 @@ export class AbsencesComponent implements OnInit {
 
     let ood = this.forma.value.datumOD + 'T00:00';
     let doo = this.forma.value.datumDO + 'T23:59';
+    console.log(ood);
 
     let params = new HttpParams().set('dateFrom', ood);
     params.set('dateTo', doo);
