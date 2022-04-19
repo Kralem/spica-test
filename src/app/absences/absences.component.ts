@@ -10,6 +10,7 @@ import { FormBuilder } from '@angular/forms';
 export class AbsencesComponent implements OnInit {
   public absence: Absence[] = [];
   public users: User[] = [];
+  public joined: Joined[] = [];
 
   constructor(private http: HttpClient, public formbuilder: FormBuilder) {}
 
@@ -48,8 +49,11 @@ export class AbsencesComponent implements OnInit {
       authorization: token,
     });
 
-    let params = new HttpParams().set('dateFrom', this.forma.value.datumOD);
-    params.set('dateTo', this.forma.value.datumDO);
+    let ood = this.forma.value.datumOD + 'T00:00';
+    let doo = this.forma.value.datumDO + 'T23:59';
+
+    let params = new HttpParams().set('dateFrom', ood);
+    params.set('dateTo', doo);
     let options1 = { headers, params };
     let options2 = { headers };
     this.http
@@ -58,6 +62,18 @@ export class AbsencesComponent implements OnInit {
     this.http
       .get<any>(string_url2, options2)
       .subscribe((x) => (this.users = x));
+
+    for (var val of this.absence) {
+      for (var val2 of this.users) {
+        if (val2.Id == val.UserId) {
+          this.joined.push({
+            FirstName: val2.FirstName,
+            Timestamp: val.Timestamp,
+            Comment: val.Comment,
+          });
+        }
+      }
+    }
   }
 }
 
@@ -68,7 +84,14 @@ class Absence {
 }
 
 class User {
+  Id?: string;
   FirstName?: string;
   LastName?: string;
   Email?: string;
+}
+
+class Joined {
+  FirstName?: string;
+  Timestamp?: string;
+  Comment?: string;
 }

@@ -5,7 +5,7 @@
     <input id="datumDO" type="text" formControlName="datumDO" />
     <button class="button" type="submit" (click)="onSubmit()">Submit</button>
   </form>
-  <div *ngFor="let abs of absence">
-    <p>{{ abs.UserId }} {{ abs.Timestamp }} {{ abs.Comment }}</p>
+  <div *ngFor="let j of joined">
+    <p>{{ j.FirstName }} {{ j.Timestamp }} {{ j.Comment }}</p>
   </div>
 </div>
