@@ -9,9 +9,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersComponent } from './users/users.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { AbsencesComponent } from './absences/absences.component';
 
 @NgModule({
-  declarations: [AppComponent, SettingsComponent, UsersComponent, AddUserComponent],
+  declarations: [
+    AppComponent,
+    SettingsComponent,
+    UsersComponent,
+    AddUserComponent,
+    AbsencesComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
