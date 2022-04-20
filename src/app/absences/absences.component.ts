@@ -25,7 +25,7 @@ export class AbsencesComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (
       this.validateDate(this.forma.value.datumOD) == false ||
       this.validateDate(this.forma.value.datumDO) == false
@@ -48,20 +48,22 @@ export class AbsencesComponent implements OnInit {
       authorization: token,
     });
 
-    let ood = this.forma.value.datumOD + 'T00:00';
-    let doo = this.forma.value.datumDO + 'T23:59';
-    console.log(ood);
+    let ood = this.forma.value.datumOD + 'T00:00:00';
+    let doo = this.forma.value.datumDO + 'T23:59:00';
+    //console.log(ood);
 
     let params = new HttpParams().set('dateFrom', ood);
     params.set('dateTo', doo);
     let options1 = { headers, params };
     let options2 = { headers };
-    this.http
+    const t1 = await this.http
       .get<any>(string_url, options1)
-      .subscribe((x) => (this.absence = x));
-    this.http
+      .forEach((x) => (this.absence = x));
+    const t2 = await this.http
       .get<any>(string_url2, options2)
-      .subscribe((x) => (this.users = x));
+      .forEach((x) => (this.users = x));
+
+    //console.log(this.users);
 
     for (var val of this.absence) {
       for (var val2 of this.users) {
