@@ -1,27 +1,19 @@
 # Allhours
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
+Projekt je bil narejen s pomočjo Angularja.
 
-## Development server
+## Namestitev
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Za namestitev poženite npm install.
+Če bo kaj manjkalo, lahko ročno namestite Angular takole: npm i @angular/cli
 
-## Code scaffolding
+## Zagon aplikacije
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Angular projekt lahko zaženete z ng serve.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Kaj vsebuje naloga
+- Settings pogled (localhost:4200/settings) - tu se vpiše client id in client secret
+- Users pogled (localhost:4200/users in /addUser) - izpis uporabnikov ter dodajanje uporabnika
+- Absences pogled (localhost:4200/absences) - izpis absencov (ne dela za določen dan, vpišite testni datum v polja npr. 2020-11-11)
+- Poleg tega imajo pogledi za uporabnike in odsotnosti enostaven error handling (če token ni nastavljen) in nastavljen race condition pri absencih
+Manjka pa dodajanje odsotnosti uporabniku in delujoč filter za datume...
