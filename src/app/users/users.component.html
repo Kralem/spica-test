@@ -3,6 +3,9 @@
     <input id="searchTerm" type="text" formControlName="searchTerm" />
     <button class="button" type="submit" (click)="onSubmit()">Submit</button>
   </form>
+  <br />
+  <div *ngIf="napaka == 'slab token'">WARN: token ni dobro nastavljen</div>
+  <div *ngIf="napaka == ''">SEZNAM UPORABNIKOV</div>
   <div *ngFor="let user of users">
     <p>{{ user.FirstName }} {{ user.LastName }} {{ user.Email }}</p>
   </div>

@@ -18,13 +18,15 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    // Process input data here
+    //procesiramo podatke
     console.log('Your secret has been submitted', this.forma.value);
     this.login(this.forma.value.client_id, this.forma.value.client_secret);
     this.forma.reset();
+    const token = localStorage.getItem('currentUser');
   }
 
   login(client_id: string, client_secret: string) {
+    //http request ni delal, sem ga naredil ročno z javascriptom
     var url = 'https://login.allhours.com/connect/token';
 
     var xhr = new XMLHttpRequest();

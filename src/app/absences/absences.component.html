@@ -5,6 +5,14 @@
     <input id="datumDO" type="text" formControlName="datumDO" />
     <button class="button" type="submit" (click)="onSubmit()">Submit</button>
   </form>
+  <br />
+  <div *ngIf="napaka == 'datum v nepravilnem formatu'">
+    WARN: datum v nepravilnem formatu
+  </div>
+  <div *ngIf="napaka == 'token ni dobro nastavljen'">
+    WARN: token ni dobro nastavljen
+  </div>
+  <div *ngIf="napaka == ''">SEZNAM ODSOTNOSTI</div>
   <div *ngFor="let j of joined">
     <p>{{ j.FirstName }} {{ j.Timestamp }} {{ j.Comment }}</p>
   </div>

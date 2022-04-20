@@ -8,6 +8,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./absences.component.scss'],
 })
 export class AbsencesComponent implements OnInit {
+  public napaka?: string;
   public absence: Absence[] = [];
   public users: User[] = [];
   public joined: Joined[] = [];
@@ -30,18 +31,21 @@ export class AbsencesComponent implements OnInit {
       this.validateDate(this.forma.value.datumOD) == false ||
       this.validateDate(this.forma.value.datumDO) == false
     ) {
-      return console.log('error');
+      this.napaka = 'datum v nepravilnem formatu';
+      return;
     }
 
     let token = localStorage.getItem('currentUser');
     if (token == null) {
       console.log('error');
+      this.napaka = 'token ni dobro nastavljen';
       return;
     }
+    this.napaka = '';
     let string_url = 'https://api4.allhours.com/api/v1/Absences';
     let string_url2 = 'https://api4.allhours.com/api/v1/Users';
     token = JSON.parse(token).access_token as string;
-    console.log(token);
+
     token = 'Bearer ' + token;
     let headers = new HttpHeaders({
       'content-type': 'application/json',
@@ -50,20 +54,18 @@ export class AbsencesComponent implements OnInit {
 
     let ood = this.forma.value.datumOD + 'T00:00:00';
     let doo = this.forma.value.datumDO + 'T23:59:00';
-    //console.log(ood);
 
     let params = new HttpParams().set('dateFrom', ood);
     params.set('dateTo', doo);
     let options1 = { headers, params };
     let options2 = { headers };
+    //dodan race condition, ker imamo 2 api klica
     const t1 = await this.http
       .get<any>(string_url, options1)
       .forEach((x) => (this.absence = x));
     const t2 = await this.http
       .get<any>(string_url2, options2)
       .forEach((x) => (this.users = x));
-
-    //console.log(this.users);
 
     for (var val of this.absence) {
       for (var val2 of this.users) {

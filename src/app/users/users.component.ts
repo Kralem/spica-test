@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpParams
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-users',
@@ -11,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  public napaka?: string;
   public users: User[] = [];
 
   constructor(private http: HttpClient, public formbuilder: FormBuilder) {}
@@ -22,9 +19,10 @@ export class UsersComponent implements OnInit {
   ngOnInit(): void {
     let token = localStorage.getItem('currentUser');
     if (token == null) {
-      console.log('error');
+      this.napaka = 'slab token';
       return;
     }
+    this.napaka = '';
     let string_url = 'https://api4.allhours.com/api/v1/Users';
     token = JSON.parse(token).access_token as string;
     console.log(token);
@@ -40,9 +38,10 @@ export class UsersComponent implements OnInit {
   onSubmit(): void {
     let token = localStorage.getItem('currentUser');
     if (token == null) {
-      console.log('error');
+      this.napaka = 'slab token';
       return;
     }
+    this.napaka = '';
     let string_url = 'https://api4.allhours.com/api/v1/Users/Query';
     token = JSON.parse(token).access_token as string;
     console.log(token);

@@ -1,9 +1,12 @@
 <div>
-    <p>add-user works!</p>
-    <form [formGroup]="forma">
-      <input id="FirstName" type="text" formControlName="FirstName" />
-      <input id="LastName" type="text" formControlName="LastName" />
-      <input id="Email" type="text" formControlName="Email" />
-      <button class="button" type="submit" (click)="onSubmit()">Submit</button>
-    </form>
-  </div>
+  <p>add-user works!</p>
+  <form [formGroup]="forma">
+    <input id="FirstName" type="text" formControlName="FirstName" />
+    <input id="LastName" type="text" formControlName="LastName" />
+    <input id="Email" type="text" formControlName="Email" />
+    <button class="button" type="submit" (click)="onSubmit()">Submit</button>
+  </form>
+  <br />
+  <div *ngIf="napaka == 'slab token'">WARN: token ni dobro nastavljen</div>
+  <div *ngIf="napaka == 'submitted'">UPORABNIK DODAN!</div>
+</div>

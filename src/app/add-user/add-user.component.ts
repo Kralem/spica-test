@@ -8,6 +8,7 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./add-user.component.scss'],
 })
 export class AddUserComponent implements OnInit {
+  public napaka?: string;
   constructor(private http: HttpClient, public formbuilder: FormBuilder) {}
 
   public forma = this.formbuilder.group({
@@ -19,7 +20,6 @@ export class AddUserComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    console.log('Your user has been submitted', this.forma.value);
     this.addUser(
       this.forma.value.FirstName,
       this.forma.value.LastName,
@@ -31,7 +31,7 @@ export class AddUserComponent implements OnInit {
   addUser(n: string, l: string, e: string) {
     let token = localStorage.getItem('currentUser');
     if (token == null) {
-      console.log('error');
+      this.napaka = 'slab token';
       return;
     }
     let string_url = 'https://api4.allhours.com/api/v1/Users';
@@ -47,5 +47,6 @@ export class AddUserComponent implements OnInit {
     this.http
       .post<any>(string_url, body, options)
       .subscribe((x) => console.log(x));
+    this.napaka = 'submitted';
   }
 }
